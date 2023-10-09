@@ -1,0 +1,7 @@
+{
+  "name": "wails-vite-vue-ts-navie-pinia",
+  "shortname": "wvvtnp",
+  "author": "id88",
+  "description": "A template for Wails with Vite + Vue + TypeScript + NavieUI + Pinia.",
+  "helpurl": "https://github.com/id88/wails-vite-vue-ts-navie-pinia"
+}
