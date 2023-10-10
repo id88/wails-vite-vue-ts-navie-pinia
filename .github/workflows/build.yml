@@ -54,18 +54,21 @@ jobs:
         run: |
           cd ..
           wails init -n my-wails-project -t wails-vite-vue-ts-navie-pinia
-        working-directory: ./my-wails-project
 
       - name: Build Release Files
-        run: wails build
+        run: |
+          cd ../my-wails-project
+          wails build
       
       - name: Tar files on Linux
         if: matrix.os == 'ubuntu-latest'
-        run: tar -cvf build_on_${{ matrix.os }}.tar ./build/bin/
+        run: |
+          cd ../my-wails-project
+          tar -cvf build_on_${{ matrix.os }}.tar /build/bin/
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
           name: build_on_${{ matrix.os }}
-          path: build/bin/
+          path: ../my-wails-project/build/bin/
           retention-days: 5
