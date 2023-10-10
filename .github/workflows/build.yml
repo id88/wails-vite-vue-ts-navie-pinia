@@ -70,7 +70,7 @@ jobs:
         if: runner.os == 'Windows'
         shell: cmd # 在Windows中默认值是pwsh，也就是在运行 run 命令时使用 PowerShell
         run: |
-          echo artifacts_path=%CD% >> $GITHUB_ENV
+          echo artifacts_path=%CD% >> %GITHUB_ENV%
           echo 'The path is: ${{ env.artifacts_path }}/build/bin/'
 
       # - name: Set artifacts_path (Linux)
