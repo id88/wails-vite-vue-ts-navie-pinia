@@ -59,12 +59,10 @@ jobs:
         run: |
           cd ../my-wails-project
           wails build
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Tar files on Linux
         if: matrix.os == 'ubuntu-latest'
-        run: tar -cvf build_on_${{ matrix.os }}.tar ./build/bin/
+        run: pwd & ls
 
 
       - name: Upload Artifact
