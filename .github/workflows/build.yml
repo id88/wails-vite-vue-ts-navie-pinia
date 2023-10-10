@@ -64,7 +64,7 @@ jobs:
         if: matrix.os == 'ubuntu-latest'
         run: |
           cd ../my-wails-project
-          tar -cvf build_on_${{ matrix.os }}.tar /build/bin/
+          tar -cvf build_on_${{ matrix.os }}.tar ./build/bin/
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
