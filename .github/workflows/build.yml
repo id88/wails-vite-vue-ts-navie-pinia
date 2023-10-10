@@ -83,7 +83,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: build_on_${{ matrix.os }}
-          path: %artifacts_path%/build/bin/
+          path: '%artifacts_path%/build/bin/'
           retention-days: 5
 # If you use `actions/upload-artifact@v3`, you must know:
 # NOTE: Relative pathing '.' and '..' is not allowed. See #176
