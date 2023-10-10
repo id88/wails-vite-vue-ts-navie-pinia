@@ -64,7 +64,7 @@ jobs:
       
       - name: Tar files on Linux
         if: matrix.os == 'ubuntu-latest'
-        run: tar -cvf build_on_${{ matrix.os }}.tar build/bin/
+        run: tar -cvf build_on_${{ matrix.os }}.tar ./build/bin/
 
 
       - name: Upload Artifact
