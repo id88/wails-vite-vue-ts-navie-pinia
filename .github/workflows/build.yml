@@ -24,7 +24,7 @@ jobs:
         # os: [windows-latest, ubuntu-latest, macos-latest]
         os: [windows-latest]
 
-    # steps:
+    steps:
     #   - name: Checkout Code
     #     uses: actions/checkout@v3
 
