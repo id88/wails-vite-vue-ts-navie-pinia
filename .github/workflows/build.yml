@@ -70,5 +70,6 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: build_on_${{ matrix.os }}
-          path: ../my-wails-project/build/bin/
+          path: build/bin/
           retention-days: 5
+        working-directory: ../my-wails-project/
