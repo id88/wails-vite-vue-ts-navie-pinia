@@ -71,7 +71,7 @@ jobs:
         shell: cmd # 在Windows中默认值是pwsh，也就是在运行 run 命令时使用 PowerShell
         run: |
           echo artifacts_path=%CD% >> %GITHUB_ENV%
-          echo 'The path is: ${{ env.artifacts_path }}/build/bin/'
+          echo The path is: %artifacts_path%/build/bin/
 
       # - name: Set artifacts_path (Linux)
       #   if: runner.os != 'Windows'
@@ -79,12 +79,12 @@ jobs:
       #     cd ../my-wails-project
       #     echo "artifacts_path=$PWD" >> $GITHUB_ENV
 
-      # - name: Upload Artifact
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: build_on_${{ matrix.os }}
-      #     path: ${{ env.artifacts_path }}/build/bin/
-      #     retention-days: 5
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build_on_${{ matrix.os }}
+          path: %artifacts_path%/build/bin/
+          retention-days: 5
 # If you use `actions/upload-artifact@v3`, you must know:
 # NOTE: Relative pathing '.' and '..' is not allowed. See #176
 # NOTE: 'working-directory' cannot be set here
