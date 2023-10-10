@@ -21,7 +21,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [windows-latest, ubuntu-latest, macos-latest]
+        os: [windows-latest]
 
     steps:
       - name: Checkout Code
@@ -44,9 +44,7 @@ jobs:
 
       - name: Creating project with a template
         run: |
-          pwd & ls
-          git clone https://github.com/id88/wails-vite-vue-ts-navie-pinia.git
-          ls
+          cd ..
           wails init -n my-wails-project -t wails-vite-vue-ts-navie-pinia
 
       - name: Build Release Files
