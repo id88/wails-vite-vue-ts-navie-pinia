@@ -66,20 +66,23 @@ jobs:
           cd ../my-wails-project
           tar -cvf build_on_${{ matrix.os }}.tar ./build/bin/
 
-      - name: Get current directory
-        id: current_dir
-        run: echo "::set-output name=dir::$(pwd)"
+      - name: Set artifacts_path
+        if: runner.os == 'Windows'
+        run: |
+          cd ../my-wails-project
+          echo artifacts_path=%CD% >> $GITHUB_ENV
+        if: runner.os != 'Windows'
+        run: |
+          cd ../my-wails-project
+          echo "artifacts_path=$PWD" >> $GITHUB_ENV
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
           name: build_on_${{ matrix.os }}
-          path: '../build/bin/'
+          path: ${{ env.artifacts_path }}/build/bin/
           retention-days: 5
 # If you use `actions/upload-artifact@v3`, you must know:
-# NOTE: Relative and absolute file paths are both allowed.
-#  Relative paths are rooted against the current working directory. 
-#  Paths that begin with a wildcard character should be quoted to avoid 
-#  being interpreted as YAML aliases.
+# NOTE: Relative pathing '.' and '..' is not allowed. See #176
 # NOTE: 'working-directory' cannot be set here
 # NOTE: A step cannot have both the `uses` and `run` keys
