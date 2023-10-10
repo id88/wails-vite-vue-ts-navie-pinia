@@ -28,7 +28,6 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Install linux dependencies
-        # if: runner.os == 'Linux'
         if: matrix.os == 'ubuntu-latest'
         run: |
           echo "The operating system on the runner is $env:RUNNER_OS."
@@ -60,14 +59,15 @@ jobs:
           cd ../my-wails-project
           wails build
       
-      - name: Tar files on Linux
-        if: matrix.os == 'ubuntu-latest'
-        run: |
-          cd ../my-wails-project
-          tar -cvf build_on_${{ matrix.os }}.tar ./build/bin/
+      # - name: Tar files on Linux
+      #   if: matrix.os == 'ubuntu-latest'
+      #   run: |
+      #     cd ../my-wails-project
+      #     tar -cvf build_on_${{ matrix.os }}.tar ./build/bin/
 
       - name: Set artifacts_path (Windows)
         if: runner.os == 'Windows'
+        shell: cmd # 在Windows中默认值是pwsh，也就是在运行 run 命令时使用 PowerShell
         run: |
           cd ../my-wails-project
           echo artifacts_path=%CD% >> $GITHUB_ENV
