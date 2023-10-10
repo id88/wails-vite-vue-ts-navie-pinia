@@ -66,15 +66,17 @@ jobs:
           cd ../my-wails-project
           tar -cvf build_on_${{ matrix.os }}.tar ./build/bin/
 
-      - name: Set artifacts_path
-        if: runner.os == 'Windows'
-        run: |
-          cd ../my-wails-project
-          echo artifacts_path=%CD% >> $GITHUB_ENV
-        if: runner.os != 'Windows'
-        run: |
-          cd ../my-wails-project
-          echo "artifacts_path=$PWD" >> $GITHUB_ENV
+    - name: Set artifacts_path (Windows)
+      if: runner.os == 'Windows'
+      run: |
+        cd ../my-wails-project
+        echo artifacts_path=%CD% >> $GITHUB_ENV
+
+    - name: Set artifacts_path (Linux)
+      if: runner.os != 'Windows'
+      run: |
+        cd ../my-wails-project
+        echo "artifacts_path=$PWD" >> $GITHUB_ENV
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
