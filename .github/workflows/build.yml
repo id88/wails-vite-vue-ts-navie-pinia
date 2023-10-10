@@ -23,9 +23,6 @@ jobs:
       matrix:
         os: [windows-latest]
 
-    env:
-      BASE_DIR: ${{ GITHUB_ACTION_PATH }}
-
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
