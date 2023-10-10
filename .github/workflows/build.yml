@@ -23,9 +23,20 @@ jobs:
       matrix:
         os: [windows-latest]
 
+    env:
+      BASE_DIR: ${{ GITHUB_ACTION_PATH }}
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
+
+      - name: Install linux dependencies
+        # if: runner.os == 'Linux'
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          echo "The operating system on the runner is $env:RUNNER_OS."
+          sudo apt-get update -y && sudo apt-get install -y libgtk-3-dev libwebkit2gtk-4.0-dev build-essential pkg-config
+
       - name: Setup Go
         uses: actions/setup-go@v4
         with:
@@ -49,7 +60,7 @@ jobs:
 
       - name: Build Release Files
         run: |
-          cd my-wails-project
+          cd ../my-wails-project
           wails build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
