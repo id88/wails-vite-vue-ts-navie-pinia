@@ -1,0 +1,60 @@
+name: MyWorkflows
+run-name: Deploy to ${{ inputs.deploy_target }} by @${{ github.actor }}
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "**.md"
+      - "**.spec.js"
+      - ".idea"
+      - ".vscode"
+      - ".dockerignore"
+      - "Dockerfile"
+      - ".gitignore"
+      - ".github/**"
+      - "!.github/workflows/build.yml"
+
+jobs:
+  build-project:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest, macos-latest]
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.20'
+      
+      - name: Setup Wails CLI v2.6.0
+        run: go install github.com/wailsapp/wails/v2/cmd/wails@v2.6.0
+
+      - name: Checkout Wails
+        run: wails doctor
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18  
+
+      - name: Creating project with a template
+        run: wails init -n my-wails-project -t wails-vite-vue-ts-navie-pinia
+
+      - name: Build Release Files
+        run: |
+          cd my-wails-project
+          wails build
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: release_on_${{ matrix.os }}
+          path: release/
+          retention-days: 5
