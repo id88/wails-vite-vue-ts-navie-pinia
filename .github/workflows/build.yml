@@ -43,7 +43,11 @@ jobs:
           node-version: 18  
 
       - name: Creating project with a template
-        run: wails init -n my-wails-project -t wails-vite-vue-ts-navie-pinia
+        run: |
+          pwd & ls
+          git clone https://github.com/id88/wails-vite-vue-ts-navie-pinia.git
+          ls
+          wails init -n my-wails-project -t wails-vite-vue-ts-navie-pinia
 
       - name: Build Release Files
         run: |
