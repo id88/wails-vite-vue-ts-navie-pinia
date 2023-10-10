@@ -70,7 +70,7 @@ jobs:
         if: runner.os != 'Windows'
         run: |
           mkdir -p build/bin
-          cp ../my-wails-project/build/bin/* build/bin/
+          cp -r ../my-wails-project/build/bin/* build/bin/
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
