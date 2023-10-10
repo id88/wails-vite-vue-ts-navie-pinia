@@ -67,9 +67,11 @@ jobs:
           tar -cvf build_on_${{ matrix.os }}.tar ./build/bin/
 
       - name: Upload Artifact
+        run: cd ../my-wails-project
         uses: actions/upload-artifact@v3
+        # NOTE: 'working-directory' cannot be set here
         with:
           name: build_on_${{ matrix.os }}
+          # NOTE: Relative pathing '.' and '..' is not allowed.
           path: build/bin/
           retention-days: 5
-        working-directory: ../my-wails-project/
