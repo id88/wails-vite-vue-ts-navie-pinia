@@ -16,7 +16,7 @@ on:
       - "!.github/workflows/build.yml"
 
 jobs:
-  build-project:
+  build-release-files:
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -78,6 +78,6 @@ jobs:
           path: build/bin
           retention-days: 5
 # If you use `actions/upload-artifact@v3`, you must know:
-# NOTE: Relative pathing '.' and '..' is not allowed. See #176
-# NOTE: 'working-directory' cannot be set here
-# NOTE: A step cannot have both the `uses` and `run` keys
+# - Relative pathing '.' and '..' is not allowed. See #176
+# - 'working-directory' cannot be set here
+# - A step cannot have both the `uses` and `run` keys
