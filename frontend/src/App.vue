@@ -39,4 +39,16 @@ import HelloWorld from './components/HelloWorld.vue'
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #42b883aa);
 }
+.logo.wails:hover {
+  filter: drop-shadow(0 0 2em #D02A2C);
+}
+.logo.typescript:hover {
+  filter: drop-shadow(0 0 2em #1296DB);
+}
+.logo.naive-ui:hover {
+  filter: drop-shadow(0 0 2em #5FBC21);
+}
+.logo.pinia:hover {
+  filter: drop-shadow(0 0 2em #FFCF48);
+}
 </style>
